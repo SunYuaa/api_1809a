@@ -13,10 +13,8 @@ class DemoController extends Controller
     }
 
     //注册
-    public function reg()
-    {
-        
+    public function reg(){
+        header('Access-Control-Allow-Origin: http://127.0.0.1:8848');
         return (request()->input());
-
     }
 }
