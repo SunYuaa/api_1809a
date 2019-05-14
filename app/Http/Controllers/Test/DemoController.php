@@ -12,4 +12,10 @@ class DemoController extends Controller
         echo time();
     }
 
+    //注册
+    public function reg()
+    {
+        var_dump($_POST);
+        
+    }
 }
