@@ -15,7 +15,7 @@ class DemoController extends Controller
     //注册
     public function reg()
     {
-        var_dump($_POST);
-        
+        return (request()->input());
+
     }
 }
