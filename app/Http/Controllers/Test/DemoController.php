@@ -15,6 +15,7 @@ class DemoController extends Controller
     //注册
     public function reg()
     {
+        
         return (request()->input());
 
     }
