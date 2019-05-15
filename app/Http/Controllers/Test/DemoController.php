@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Test;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
+use App\Model\Exam\UserModel;
 
 class DemoController extends Controller
 {
@@ -19,17 +20,36 @@ class DemoController extends Controller
 //        header('Access-Control-Allow-Methods:OPTIONS,GET,POST');
 //        header('Access-Control-Allow-Headers:x-requested-with');
 
-
-
-        echo json_encode([
-            'errcode' => 0,
-            'errmsg' => 'success'
-        ]);
+        $name = $_POST['name'];
+        $pwd = $_POST['pwd'];
+        $email = $_POST['email'];
+        $e = UserModel::where(['email'=>$email])->first();
+        if($e){
+            $response = [
+                'errcode' => 2001,
+                'errmsg' => '该邮箱已存在'
+            ];
+        }else{
+            $data = [
+                'user_name' => $name,
+                'password' => $pwd,
+                'email' => $email
+            ];
+            $id = UserModel::insertGetId($data);
+            if($id){
+                $response = [
+                    'errcode' => 0,
+                    'errmsg' => 'success'
+                ];
+            }else{
+                $response = [
+                    'errcode' => 1001,
+                    'errmsg' => 'fail'
+                ];
+            }
+        }
+        return json_encode($response);
     }
 
-    //
-    public function op()
-    {
-        return optional('xixi',1233132);
-    }
+
 }
