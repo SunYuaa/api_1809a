@@ -78,8 +78,7 @@ class DemoController extends Controller
         return json_encode($response);
     }
     //个人中心
-    public function center()
-    {
+    public function center(){
         $uid = $_GET['uid'];
         $token = $_GET['token'];
 
