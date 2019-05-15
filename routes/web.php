@@ -19,10 +19,10 @@ $router->post('/test/reqSec','Test\TestController@reqSec');
 $router->post('/test/unSec','Test\TestController@unSec');
 $router->post('/test/reqSign','Test\TestController@reqSign');
 $router->get('/test/demo','Test\DemoController@demo');
-//$router->options('/demo/reg/',function() use ($router){
-//    return [];
-//});
-$router->post('/demo/reg/','Test\DemoController@reg');
 
 $router->post('/login/register','Exam\ThirdController@register');
 $router->get('/login/redis','Exam\ThirdController@redis');
+
+$router->post('/demo/reg/','Test\DemoController@reg');
+$router->post('/demo/login/','Test\DemoController@login');
+$router->get('/demo/center','Test\DemoController@center');
