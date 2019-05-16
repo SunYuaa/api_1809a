@@ -77,22 +77,15 @@ class DemoController extends Controller
     //个人中心
     public function center(){
         $uid = $_GET['uid'];
-        $token = $_GET['token'];
-
-        $data = [
-            'uid' => $uid,
-            'token' => $token,
-        ];
-        $json_data = json_encode($data);
+        $token = $_GET['token'];    
 
         //传输
-//        $url = 'http://passport.1809a.com/demo/center/';
-        $url = 'http://passport.suyna.top/demo/center/';
+        // $url = 'http://passport.1809a.com/demo/center?uid='.$uid.'&token='.$token;
+        $url = 'http://passport.suyna.top/demo/center?uid='.$uid.'&token='.$token;
+
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_POST,1);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$json_data);
-        curl_setopt($ch,CURLOPT_HTTPHEADER,['Content-Type:text/plain']);
+        curl_setopt($ch,CURLOPT_HEADER,0);
         curl_exec($ch);
         $code = curl_errno($ch);
         if($code>0){
