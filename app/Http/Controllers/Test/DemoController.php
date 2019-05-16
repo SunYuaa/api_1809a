@@ -40,7 +40,7 @@ class DemoController extends Controller
         curl_setopt($ch,CURLOPT_HTTPHEADER,['Content-Type:text/plain']);
         curl_exec($ch);
         $code = curl_errno($ch);
-        if($code>0){
+        if($code > 0){
             echo $code;die;
         }
         curl_close($ch);
