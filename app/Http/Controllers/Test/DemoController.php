@@ -23,59 +23,54 @@ class DemoController extends Controller
         $name = $_POST['name'];
         $pwd = $_POST['pwd'];
         $email = $_POST['email'];
-
-
-        $e = UserModel::where(['email'=>$email])->first();
-        if($e){
-            $response = [
-                'errcode' => 2001,
-                'errmsg' => '该邮箱已存在'
-            ];
-        }else{
-            $data = [
+        $data = [
                 'user_name' => $name,
                 'password' => $pwd,
                 'email' => $email
-            ];
-            $id = UserModel::insertGetId($data);
-            if($id){
-                $response = [
-                    'errcode' => 0,
-                    'errmsg' => 'success'
-                ];
-            }else{
-                $response = [
-                    'errcode' => 1001,
-                    'errmsg' => 'fail'
-                ];
-            }
-        }
-        return json_encode($response);
-    }
+        ];
+        $json_data = json_encode($data);
 
+        //传输
+        $url = 'http://passport.1809a.com/demo/reg/';
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$json_data);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,['Content-Type:text/plain']);
+        curl_exec($ch);
+        $code = curl_errno($ch);
+        if($code>0){
+            echo $code;die;
+        }
+        curl_close($ch);
+        return ;
+    }
     //登录
     public function login(){
         $name = $_POST['name'];
         $pwd = $_POST['pwd'];
 
-        $res = UserModel::where(['user_name'=>$name,'password'=>$pwd])->first();
-        if($res){
-            $token = Str::random(6);
-            $response = [
-                'errcode' => 0,
-                'errmsg' => 'success',
-                'data' => [
-                    'token' => $token,
-                    'uid' => $res->id
-                ]
-            ];
-        }else{
-            $response = [
-                'errcode' => 2002,
-                'errmsg' => 'fail'
-            ];
+        $data = [
+            'user_name' => $name,
+            'password' => $pwd,
+        ];
+        $json_data = json_encode($data);
+
+        //传输
+        $url = 'http://passport.1809a.com/demo/login/';
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$json_data);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,['Content-Type:text/plain']);
+        curl_exec($ch);
+        $code = curl_errno($ch);
+        if($code>0){
+            echo $code;die;
         }
-        return json_encode($response);
+        curl_close($ch);
+        return ;
+       
     }
     //个人中心
     public function center(){
