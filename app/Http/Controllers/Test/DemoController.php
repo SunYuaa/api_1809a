@@ -79,21 +79,27 @@ class DemoController extends Controller
         $uid = $_GET['uid'];
         $token = $_GET['token'];
 
-        $userInfo = UserModel::where(['id'=>$uid])->first()->toArray();
-        if($userInfo){
-            $response = [
-                'errcode' => 0,
-                'errmsg' => 'success',
-                'data' => [
-                    'userInfo' => $userInfo
-                ]
-            ];
-        }else{
-            $response = [
-                'errcode' => 1002,
-                'errmsg' => '用户不存在'
-            ];
+        $data = [
+            'uid' => $uid,
+            'token' => $token,
+        ];
+        $json_data = json_encode($data);
+
+        //传输
+//        $url = 'http://passport.1809a.com/demo/center/';
+        $url = 'http://passport.suyna.top/demo/center/';
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$json_data);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,['Content-Type:text/plain']);
+        curl_exec($ch);
+        $code = curl_errno($ch);
+        if($code>0){
+            echo $code;die;
         }
-        return json_encode($response);
+        curl_close($ch);
+        return ;
+
     }
 }
