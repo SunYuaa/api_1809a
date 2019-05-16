@@ -31,7 +31,8 @@ class DemoController extends Controller
         $json_data = json_encode($data);
 
         //传输
-        $url = 'http://passport.1809a.com/demo/reg/';
+//        $url = 'http://passport.1809a.com/demo/reg/';
+        $url = 'http://passport.suyna.top/demo/reg/';
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_POST,1);
@@ -57,7 +58,8 @@ class DemoController extends Controller
         $json_data = json_encode($data);
 
         //传输
-        $url = 'http://passport.1809a.com/demo/login/';
+//        $url = 'http://passport.1809a.com/demo/login/';
+        $url = 'http://passport.suyna.top/demo/login/';
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
         curl_setopt($ch,CURLOPT_POST,1);
