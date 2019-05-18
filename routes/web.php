@@ -23,6 +23,16 @@ $router->get('/test/demo','Test\DemoController@demo');
 $router->post('/login/register','Exam\ThirdController@register');
 $router->get('/login/redis','Exam\ThirdController@redis');
 
-$router->post('/demo/reg/','Test\DemoController@reg');
-$router->post('/demo/login/','Test\DemoController@login');
-$router->get('/demo/center','Test\DemoController@center');
+//demo APP
+$router->post('/demo/reg/','Test\DemoController@reg'); //注册
+$router->post('/demo/login/','Test\DemoController@login'); //登录
+$router->get('/demo/center','Test\DemoController@center'); //个人中心
+
+$router->get('/demo/goods/goodsList/','Test\GoodsController@goodsList'); //商品列表
+$router->post('/demo/goods/goodsDetail/','Test\GoodsController@goodsDetail'); //商品详情
+
+$router->post('/demo/cart/cartAdd/','Test\CartController@cartAdd'); //加入购物车
+$router->get('/demo/cart/cartList/','Test\CartController@cartList'); //购物车
+
+$router->get('/demo/order/order/','Test\OrderController@order'); //
+$router->post('/demo/order/orderDo/','Test\OrderController@orderDo'); //
